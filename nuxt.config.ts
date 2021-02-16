@@ -8,6 +8,7 @@ const envRouterBase = process.env.ROUTER_BASE || '/'
 
 // noinspection JSUnusedGlobalSymbols
 const config: NuxtConfig = {
+    target: 'static',
     env: {
         routerBase: envRouterBase
     },
@@ -52,7 +53,7 @@ const config: NuxtConfig = {
 
         const options: NuxtOptionsHead = {
             title: process.env.npm_package_name || '',
-            titleTemplate (titleChunk: string) {
+            titleTemplate(titleChunk: string) {
                 return titleChunk ? `${titleChunk} — Stroyka` : 'Stroyka'
             },
             htmlAttrs: {
@@ -90,7 +91,7 @@ const config: NuxtConfig = {
     router: {
         base: envRouterBase,
         middleware: 'i18n',
-        extendRoutes (routes) {
+        extendRoutes(routes) {
             routes.slice().forEach((route) => {
                 const langRoute = {
                     name: `lang-${route.name}`,
@@ -133,7 +134,7 @@ const config: NuxtConfig = {
         /*
         ** You can extend webpack config here
         */
-        extend (config) {
+        extend(config) {
             if (!config.module) {
                 return
             }
@@ -172,7 +173,7 @@ const config: NuxtConfig = {
         }
     },
     generate: {
-        routes () {
+        routes() {
             const urls: string[] = []
 
             dataLanguages.forEach((lang) => {
