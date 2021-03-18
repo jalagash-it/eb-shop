@@ -16,7 +16,7 @@ import { NuxtAxiosInstance } from "@nuxtjs/axios";
     };
   },
   mounted() {
-    window["test"] = this;
+    // window["test"] = this;
     this.$axios.$get("http://localhost:8000/products/1").then((res) => {
       console.log(res);
       Object.assign((this as Page).product, res);
