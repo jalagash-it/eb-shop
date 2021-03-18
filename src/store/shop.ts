@@ -119,6 +119,8 @@ export const actions: ActionTree<ShopState, {}> = {
         ])
     },
     async fetchCategory ({ commit }, payload: FetchCategoryPayload): Promise<void> {
+        
+        console.log('fetchCategory')
         let canceled = false
 
         cancelPreviousCategoryRequest()

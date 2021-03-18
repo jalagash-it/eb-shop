@@ -111,6 +111,7 @@ const config: NuxtConfig = {
         '~/plugins/url.ts',
         '~/plugins/currency.ts',
         '~/plugins/i18n.ts',
+        { src: '~/plugins/axios.ts', ssr: false },
         { src: '~/plugins/notifications.ts', ssr: false },
         { src: '~/plugins/local-storage.ts', ssr: false }
     ],
@@ -125,7 +126,8 @@ const config: NuxtConfig = {
     */
     modules: [
         // Doc: https://bootstrap-vue.js.org
-        'bootstrap-vue/nuxt'
+        'bootstrap-vue/nuxt',
+        '@nuxtjs/axios'
     ],
     /*
     ** Build configuration

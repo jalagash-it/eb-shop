@@ -304,3 +304,7 @@ const dataHeaderDepartments: INav = [
 ]
 
 export default dataHeaderDepartments
+
+export async function loadCategories():Promise<INav>{
+return [];
+}

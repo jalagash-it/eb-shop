@@ -25,8 +25,9 @@
     },
     "types": [
       "@types/node",
+      "@types/photoswipe",
       "@nuxt/types",
-      "@types/photoswipe"
+      "@nuxtjs/axios"
     ]
   },
   "exclude": [

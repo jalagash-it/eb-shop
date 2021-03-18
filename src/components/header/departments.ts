@@ -7,7 +7,7 @@ import Megamenu from '~/components/header/megamenu.vue'
 import Menu18x14Svg from '~/svg/menu-18x14.svg'
 import ArrowRoundedDown9x6Svg from '~/svg/arrow-rounded-down-9x6.svg'
 import ArrowRoundedRight6x9Svg from '~/svg/arrow-rounded-right-6x9.svg'
-import dataHeaderDepartments from '~/data/headerDepartments'
+import dataHeaderDepartments, { loadCategories } from '~/data/headerDepartments'
 
 @Component({
     components: { AppLink, Megamenu, Menu, Menu18x14Svg, ArrowRoundedDown9x6Svg, ArrowRoundedRight6x9Svg }
@@ -20,15 +20,16 @@ export default class Departments extends Vue {
     fixed: boolean = false
     sticky: boolean = false
 
-    get itemElements () {
+    get itemElements() {
         return this.$refs.items as HTMLDivElement[] || []
     }
 
-    get submenuElements () {
+    get submenuElements() {
         return this.$refs.submenus as HTMLDivElement[] || []
     }
 
-    mounted () {
+    mounted() {
+        loadCategories();
         departments.watch(this.onSetArea)
 
         const content = this.$refs.content as HTMLElement
@@ -36,9 +37,13 @@ export default class Departments extends Vue {
         content.addEventListener('transitionend', this.onTransitionEnd)
         document.addEventListener('click', this.onGlobalClick)
     }
-
+    loadCategories() {
+        loadCategories().then((arr:INav) => {
+            this.items = arr;
+        })
+    }
     // noinspection JSUnusedGlobalSymbols
-    beforeDestroy () {
+    beforeDestroy() {
         departments.unwatch(this.onSetArea)
 
         const content = this.$refs.content as HTMLElement
@@ -47,7 +52,7 @@ export default class Departments extends Vue {
         document.removeEventListener('click', this.onGlobalClick)
     }
 
-    onClickButton (): void {
+    onClickButton(): void {
         if (this.isOpen) {
             this.closeMenu()
         } else {
@@ -55,7 +60,7 @@ export default class Departments extends Vue {
         }
     }
 
-    onGlobalClick (event: MouseEvent): void {
+    onGlobalClick(event: MouseEvent): void {
         const element = this.$el
 
         if (!element.contains(event.target as HTMLElement)) {
@@ -63,18 +68,18 @@ export default class Departments extends Vue {
         }
     }
 
-    onItemMouseEnter (item: INavLink): void {
+    onItemMouseEnter(item: INavLink): void {
         this.closeSubmenu()
         this.hoveredItem = item
         this.openSubmenu()
     }
 
-    onMouseLeave (): void {
+    onMouseLeave(): void {
         this.closeSubmenu()
         this.hoveredItem = null
     }
 
-    onSetArea (element: Element | null): void {
+    onSetArea(element: Element | null): void {
         if (element !== null) {
             this.fix()
         } else {
@@ -84,7 +89,7 @@ export default class Departments extends Vue {
         this.$emit('onSetArea', element)
     }
 
-    onTransitionEnd (event: TransitionEvent): void {
+    onTransitionEnd(event: TransitionEvent): void {
         const content = this.$refs.content as HTMLElement
 
         if (event.propertyName === 'height' && event.target === content) {
@@ -92,7 +97,7 @@ export default class Departments extends Vue {
         }
     }
 
-    openMenu (): void {
+    openMenu(): void {
         if (this.fixed) {
             return
         }
@@ -118,7 +123,7 @@ export default class Departments extends Vue {
         content.style.height = `${endHeight}px`
     }
 
-    closeMenu (immediately = false): void {
+    closeMenu(immediately = false): void {
         if (this.fixed) {
             return
         }
@@ -156,7 +161,7 @@ export default class Departments extends Vue {
         }
     }
 
-    fix (): void {
+    fix(): void {
         if (this.sticky) {
             return
         }
@@ -185,7 +190,7 @@ export default class Departments extends Vue {
         content.getBoundingClientRect() // force reflow
     }
 
-    unfix (): void {
+    unfix(): void {
         this.fixed = false
 
         const root = this.$el as HTMLElement
@@ -195,7 +200,7 @@ export default class Departments extends Vue {
         this.closeMenu(true)
     }
 
-    setStickyState (state: boolean): void {
+    setStickyState(state: boolean): void {
         this.sticky = state
 
         if (this.sticky) {
@@ -205,7 +210,7 @@ export default class Departments extends Vue {
         }
     }
 
-    openSubmenu (): void {
+    openSubmenu(): void {
         if (!this.hoveredItem || !this.hoveredItem.submenu) {
             return
         }
@@ -246,7 +251,7 @@ export default class Departments extends Vue {
         }
     }
 
-    closeSubmenu (): void {
+    closeSubmenu(): void {
         const submenu = this.getCurrentSubmenuElement()
 
         if (submenu) {
@@ -254,7 +259,7 @@ export default class Departments extends Vue {
         }
     }
 
-    getCurrentItemElement (): HTMLDivElement | null {
+    getCurrentItemElement(): HTMLDivElement | null {
         if (!this.hoveredItem) {
             return null
         }
@@ -268,7 +273,7 @@ export default class Departments extends Vue {
         return this.itemElements[index]
     }
 
-    getCurrentSubmenuElement (): HTMLDivElement | null {
+    getCurrentSubmenuElement(): HTMLDivElement | null {
         if (!this.hoveredItem) {
             return null
         }
