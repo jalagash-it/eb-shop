@@ -52,9 +52,10 @@ const config: NuxtConfig = {
         }
 
         const options: NuxtOptionsHead = {
-            title: process.env.npm_package_name || '',
+            title: 'smartroof',
             titleTemplate(titleChunk: string) {
-                return titleChunk ? `${titleChunk} — Stroyka` : 'Stroyka'
+                // return titleChunk ? `${titleChunk} — Stroyka` : 'Stroyka'
+                return titleChunk || 'smartroof'
             },
             htmlAttrs: {
                 lang: currentLanguage?.locale!,

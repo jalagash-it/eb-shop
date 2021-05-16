@@ -45,7 +45,7 @@ export default class Pagination extends Vue {
     @Prop({ type: Number, default: () => 1 }) readonly total!: number
 
     get pages () {
-        const pages = []
+        const tmp:number[] = []
         const min = Math.max(
             1,
             this.current - this.siblings - Math.max(
@@ -56,10 +56,10 @@ export default class Pagination extends Vue {
         const max = Math.min(this.total, min + this.siblings * 2)
 
         for (let i = min; i <= max; i += 1) {
-            pages.push(i)
+            tmp.push(i)
         }
 
-        return pages
+        return tmp
     }
 
     @Emit('page-change')

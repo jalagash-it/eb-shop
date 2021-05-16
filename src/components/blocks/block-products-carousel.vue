@@ -58,7 +58,7 @@ interface Data {
 }
 
 function buildColumns (rows: number, products: IProduct[]): IProduct[][] {
-    const columns = []
+    const columns:IProduct[][] = []
 
     if (rows > 0) {
         const productsQueue = products.slice()

@@ -17,16 +17,8 @@ const dataLanguages: ILanguage[] = [
         direction: 'ltr',
         messages: require('../locales/ru.json')
     },
-    {
-        locale: 'en-RTL',
-        code: 'RTL',
-        name: 'RTL',
-        icon: '/images/languages/language-3.png',
-        direction: 'rtl',
-        messages: require('../locales/en.json')
-    }
 ]
 
-export const defaultLocale = 'en'
+export const defaultLocale = 'ru'
 
 export default dataLanguages

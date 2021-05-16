@@ -123,6 +123,7 @@ async function loadColumns () {
         BlockProductColumns
     },
     async asyncData (context: Context) {
+        return context.redirect('./home-two')
         context.store.commit('options/setHeaderLayout', 'default')
         context.store.commit('options/setDropcartType', 'dropdown')
 
@@ -137,6 +138,9 @@ async function loadColumns () {
             latestProducts: await latestProducts,
             columns: await columns
         }
+    },
+    mounted(){
+        this.$router.replace('./home-two')
     },
     head () {
         return {
