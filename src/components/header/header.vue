@@ -5,8 +5,9 @@
         <div v-if="layout === 'default'" class="site-header__middle container">
             <div class="site-header__logo">
                 <AppLink to="/">
+                smartroof
                     <!-- logo -->
-                    <LogoSvg />
+                    <!-- <LogoSvg /> -->
                     <!-- logo / end -->
                 </AppLink>
             </div>
@@ -39,11 +40,11 @@ import Search from '~/components/header/search.vue'
 import NavPanel from '~/components/header/nav-panel.vue'
 import Topbar from '~/components/header/topbar.vue'
 import AppLink from '~/components/shared/app-link.vue'
-import LogoSvg from '~/svg/logo.svg'
+// import LogoSvg from '~/svg/logo.svg'
 import theme from '~/data/theme'
 
 @Component({
-    components: { AppLink, NavPanel, Search, Topbar, LogoSvg }
+    components: { AppLink, NavPanel, Search, Topbar }
 })
 export default class Header extends Vue {
     theme = theme
