@@ -1,4 +1,4 @@
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'vue-property-decorator'
 import { INav, INavLink } from '~/interfaces/menus/nav'
 import Menu from '~/components/header/menu.vue'
 import Megamenu from '~/components/header/megamenu.vue'
@@ -8,12 +8,14 @@ import { INestedLink } from '~/interfaces/menus/link'
 import NavLinksTreeItem from '~/components/header/nav-links-tree-item'
 
 @Component({
-    components: { AppLink, Megamenu, Menu, ArrowRoundedDown9x6Svg,NavLinksTreeItem }
+    components: { AppLink, Megamenu, Menu, ArrowRoundedDown9x6Svg, NavLinksTreeItem },
 })
 export default class NavLinks extends Vue {
-    items: INestedLink[] = [{ title: '1', children: [{ title: '2', children: [{ title: '3' }] }] }]
+    @Prop({ type: [], default: null }) items?: null
     hoveredItem: INavLink | null = null
-
+    // get items() {
+    //     return this.$store.getters["category/tree"]
+    // }
     get itemElements() {
         return this.$refs.items as HTMLElement[] || []
     }
@@ -107,7 +109,7 @@ export default class NavLinks extends Vue {
             return null
         }
 
-        const index = this.items.filter(x => x.children).indexOf(item)
+        const index = this.items.filter((x: any) => x.children).indexOf(item)
 
         if (index === -1 || !this.submenuElements[index]) {
             return null

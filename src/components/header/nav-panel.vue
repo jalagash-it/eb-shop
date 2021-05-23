@@ -16,7 +16,8 @@
         </div>
 
         <!-- .nav-links -->
-        <NavLinks ref="nav" class="nav-panel__nav-links" />
+        <!-- <NavLinksTree ref="nav" class="nav-panel__nav-links" /> -->
+        <NavLinks2 :items="items"></NavLinks2>
         <!-- .nav-links / end -->
 
         <div class="nav-panel__indicators">
@@ -87,11 +88,12 @@ import Sticky from "~/services/sticky";
 import departments from "~/services/departments";
 
 import Departments from "~/components/header/departments.vue";
-import NavLinks from "~/components/header/nav-links.vue";
+import NavLinks2 from "~/components/header/nav-links2.vue";
+import NavLinksTree from "~/components/header/nav-links-tree.vue";
 import AccountMenu from "~/components/header/account-menu.vue";
 import Indicator from "~/components/header/indicator.vue";
 import Dropcart from "~/components/header/dropcart.vue";
-import AppLink from '~/components/shared/app-link.vue'
+import AppLink from "~/components/shared/app-link.vue";
 import Search from "~/components/header/search.vue";
 import SearchScope from "~/components/header/search-scope.vue";
 
@@ -107,13 +109,19 @@ type Layout = "default" | "compact";
 type StickyMode = "pullToShow" | "alwaysOnTop" | false;
 
 @Component({
+  computed: {
+    items() {
+      return this.$store.getters["category/tree"];
+    },
+  },
   components: {
     SearchScope,
     Dropcart,
     Indicator,
-    NavLinks,
+    NavLinksTree,
     Departments,
     // LogoSmallSvg,
+    NavLinks2,
     Heart20Svg,
     Cart20Svg,
     Person20Svg,
@@ -134,7 +142,7 @@ export default class NavPanel extends Vue {
   @State((state: RootState) => state.wishlist) wishlist!: WishlistState;
 
   @Ref() readonly departments: Departments | undefined;
-  @Ref() readonly nav: NavLinks | undefined;
+  @Ref() readonly nav: NavLinksTree | undefined;
   @Ref() readonly searchIndicator: Indicator | undefined;
   @Ref() readonly cartIndicator: Indicator | undefined;
   @Ref() readonly accountIndicator: Indicator | undefined;
@@ -165,7 +173,7 @@ export default class NavPanel extends Vue {
         this.departments.closeMenu(true);
       }
       if (this.nav) {
-        this.nav.closeSubmenu();
+        // this.nav.closeSubmenu();
       }
       if (this.searchIndicator) {
         this.searchIndicator.close(true);
