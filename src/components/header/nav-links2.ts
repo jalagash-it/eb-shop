@@ -95,7 +95,7 @@ export default class NavLinks extends Vue {
             return null
         }
 
-        const index = this.items.indexOf(item)
+        const index = this.$props.items.indexOf(item)
 
         if (index === -1 || !this.itemElements[index]) {
             return null
@@ -109,7 +109,7 @@ export default class NavLinks extends Vue {
             return null
         }
 
-        const index = this.items.filter((x: any) => x.children).indexOf(item)
+        const index = this.$props.items.filter((x: any) => x.children).indexOf(item)
 
         if (index === -1 || !this.submenuElements[index]) {
             return null
