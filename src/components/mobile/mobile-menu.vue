@@ -9,14 +9,14 @@
         <div class="mobilemenu__body">
             <div class="mobilemenu__header">
                 <div class="mobilemenu__title">
-                    Menu
+                    Меню
                 </div>
                 <button type="button" class="mobilemenu__close" @click="$store.commit('mobileMenu/close')">
                     <Cross20Svg />
                 </button>
             </div>
             <div class="mobilemenu__content">
-                <MobileLinks :links="links" @itemClick="onItemClick" />
+                <MobileLinks :links="items" @itemClick="onItemClick" />
             </div>
         </div>
     </div>
@@ -35,7 +35,12 @@ import dataLanguages from '~/data/languages'
 import Cross20Svg from '~/svg/cross-20.svg'
 
 @Component({
-    components: { MobileLinks, Cross20Svg }
+    components: { MobileLinks, Cross20Svg },
+    computed: {
+        items() {
+            return this.$store.getters["category/tree"];
+        },
+    }
 })
 export default class MobileMenu extends Vue {
     @State((state: RootState) => state.mobileMenu.isOpen) isOpen!: boolean

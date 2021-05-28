@@ -23,7 +23,7 @@ import { NuxtAxiosInstance } from "@nuxtjs/axios";
           ? "http://localhost:8000/products/1"
           : "http://adminka.html-css.kz/products/1"
       )
-      .then((res) => {
+      .then((res:any) => {
         console.log(res);
         Object.assign((this as Page).product, res);
         //    {

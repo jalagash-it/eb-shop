@@ -36,7 +36,7 @@
             },
           ]"
         >
-          <NavLinks2 :items="items"></NavLinks2>
+          <!-- <NavLinks2 :items="items"></NavLinks2> -->
           <Menu :items="item.children" @itemClick="onSubmenuItemClick(item)" />
         </div>
       </li>

@@ -10,7 +10,7 @@
         <div class="menu__submenus-container">
             <template v-for="item in items">
                 <div
-                    v-if="item.children"
+                    v-if="item.children&&item.children.length>0"
                     ref="submenus"
                     :key="item.url"
                     class="menu__submenu"
@@ -39,7 +39,7 @@
                         <img :src="$url.img(item.icon)" alt="">
                     </div>
                     {{ item.title }}
-                    <ArrowRoundedRight6x9Svg v-if="item.children" class="menu__item-arrow" />
+                    <ArrowRoundedRight6x9Svg v-if="item.children&&item.children.length>0" class="menu__item-arrow" />
                 </AppLink>
 
                 <button v-else type="button" class="menu__item-link" @click="onItemClick(item)">
@@ -47,8 +47,8 @@
                         <!--suppress HtmlUnknownTarget -->
                         <img :src="$url.img(item.icon)" alt="">
                     </span>
-                    {{ item.title }}
-                    <ArrowRoundedRight6x9Svg v-if="item.children" class="menu__item-arrow" />
+                    {{ item.name }}
+                    <ArrowRoundedRight6x9Svg v-if="item.children&&item.children.length>0" class="menu__item-arrow" />
                 </button>
             </li>
         </ul>

@@ -6,30 +6,44 @@
                 v-slot:default="{ itemClasses, contentClasses, toggle }"
                 item-open-class="mobile-links__item--open"
             >
-                <li
+                <!-- <li
                     v-if="link.type === 'link' || link.type === 'button'"
+                    :class="[
+                        'mobile-links__item',
+                        itemClasses
+                    ]"
+                > -->
+                <li
                     :class="[
                         'mobile-links__item',
                         itemClasses
                     ]"
                 >
                     <div class="mobile-links__item-title">
-                        <AppLink
+                        <!-- <AppLink
                             v-if="link.type === 'link'"
                             :to="link.url"
                             class="mobile-links__item-link"
                             @click.native="onItemClick(link)"
                         >
-                            {{ link.title }}
-                        </AppLink>
-
+                            {{ link.name }}
+                        </AppLink> -->
+<!-- 
                         <button
                             v-if="link.type === 'button'"
                             type="button"
                             class="mobile-links__item-link"
                             @click="toggle; onItemClick(link)"
                         >
-                            {{ link.title }}
+                            {{ link.name }}
+                        </button> -->
+
+                        <button
+                            type="button"
+                            class="mobile-links__item-link"
+                            @click="toggle; onItemClick(link)"
+                        >
+                            {{ link.name }}
                         </button>
 
                         <button
